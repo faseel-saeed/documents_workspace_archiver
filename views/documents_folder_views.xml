@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="folder_view_search_archiver" model="ir.ui.view">
+        <field name="name">Workspace_search_archiver</field>
+        <field name="model">documents.folder</field>
+        <field name="inherit_id" ref="documents.folder_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                    <field name="active"/>
+                    <separator/>
+                    <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="folder_view_form_archiver" model="ir.ui.view">
+        <field name="name">Workspace_form_archiver</field>
+        <field name="model">documents.folder</field>
+        <field name="inherit_id" ref="documents.folder_view_form"/>
+        <field name="arch" type="xml">
+             <xpath expr="//div[@name='button_box']" position="before">
+                    <field name="active" invisible="1"/>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+             </xpath>
+        </field>
+    </record>
+
+</odoo>
